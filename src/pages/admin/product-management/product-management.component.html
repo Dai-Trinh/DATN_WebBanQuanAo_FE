@@ -1,0 +1,49 @@
+<div class="content" style="width: 100%; background-color: white;">
+    <div>
+        <div class="title">Danh sách sản phẩm</div>
+        <div class="new" [routerLink]="['/add-product']" routerLinkActive="active">
+            <span nz-icon nzType="plus-circle"></span> Thêm mới
+        </div>
+    </div>
+
+    <div class="search-all">
+        <span nz-icon nzType="search" style="font-size: 18px;"></span>
+        <input class="input-search"/>
+    </div>
+
+    <nz-table class="content-table" #fixedTable nzPaginationType="small" [nzData]="listOfData" [nzScroll]="{x: '1150px', y: '450px'}">
+        <thead>
+            <tr>
+                <th nzLeft>Tên sản phẩm</th>
+                <th nzLeft>Avatar</th>
+                <th>Giá bán</th>
+                <th>Số lượng còn lại</th>
+                <th>Số lượng đã bán</th>
+                <th>Thời gian cập nhật</th>
+                <th nzRight class="action-common">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-search">
+                <td nzLeft><span nz-icon nzType="search"></span><input placeholder="Tìm kiếm..."/></td>
+                <td nzLeft><span nz-icon nzType="search"></span><input placeholder="Tìm kiếm..."/></td>
+                <td><span nz-icon nzType="search"></span><input placeholder="Tìm kiếm..."/></td>
+                <td><span nz-icon nzType="search"></span><input placeholder="Tìm kiếm..."/></td>
+                <td><span nz-icon nzType="search"></span><input placeholder="Tìm kiếm..."/></td>
+                <td><span nz-icon nzType="search"></span><input placeholder="Tìm kiếm..."/></td>
+            </tr>
+            <tr *ngFor="let data of fixedTable.data">
+                <td nzLeft>{{data.name}}</td>
+                <td nzLeft>{{data.age}}</td>
+                <td>{{data.address}}</td>
+                <td>{{data.address}}</td>
+                <td>{{data.address}}</td>
+                <td>{{data.address}}</td>
+                <td nzRight class="action-common">
+                    <a href=""><span class="font-icon" nz-icon nzType="info-circle" nzTheme="outline"></span></a>
+                    <a><span class="font-icon" nz-icon nzType="delete" nzTheme="outline"></span></a>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

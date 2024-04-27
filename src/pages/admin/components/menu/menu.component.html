@@ -1,0 +1,38 @@
+<button nzTheme="light" nz-button nzType="primary" (click)="toggleCollapsed()" style="background-color: white; border: none; margin-bottom: 10px; margin-left: 240px;">
+  <span nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" style="color: black;"></span>
+</button>
+<div class="wrapper">
+  
+  <ul style="padding-top: 10px;" nz-menu nzMode="inline" nzTheme="light" [nzInlineCollapsed]="isCollapsed">
+    <li
+      nz-submenu
+      nzIcon="appstore"
+      nzTitle="Quản lý sản phẩm">
+    <!-- > <a routerLink= "product-management" ></a> -->
+      <!-- <span nz-icon nzType="appstore"></span>
+      <span>Quản lý sản phẩm</span> -->
+      <ul>
+        <li nz-menu-item routerLink="/product-management" routerLinkActive="true">Thông tin sản phẩm</li>
+        <li nz-menu-item routerLink="/category">Thông tin danh mục sản phẩm</li>
+      </ul>
+    </li>
+    <li nz-submenu nzTitle="Quản lý cửa hàng" nzIcon="home">
+      <ul>
+        <li nz-menu-item>Thông tin cửa hàng</li>
+        <li nz-menu-item>Thông tin nhân viên</li>
+        <!-- <li nz-submenu nzTitle="Submenu">
+          <ul>
+            <li nz-menu-item>Option 7</li>
+            <li nz-menu-item>Option 8</li>
+          </ul>
+        </li> -->
+      </ul>
+    </li>
+    <li nz-submenu nzTitle="Quản lý website" nzIcon="setting">
+      <ul>
+        <li nz-menu-item>Thông tin Banner</li>
+        <li nz-menu-item>Thông tin bài viết</li>
+      </ul>
+    </li>
+  </ul>
+</div>

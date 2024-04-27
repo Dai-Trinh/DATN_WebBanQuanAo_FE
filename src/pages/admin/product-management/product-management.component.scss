@@ -1,0 +1,73 @@
+.font-icon {
+    font-size: 18px;
+    padding: 0 10px;
+}
+
+
+.content {
+    padding-left: 30px;
+    overflow: scroll;
+    height: 700px;
+    padding-bottom: 50px;
+    padding-top: 40px;
+}
+
+.title {
+    font-size: 20px;
+    color: #42526d;
+    padding-bottom: 20px;
+    display: inline-block;
+}
+
+.new {
+    margin-left: 1050px;
+    display: inline-block;
+    font-size: 14px;
+    padding: 5px 10px;
+    background-color: #244A64;
+    border-radius: 5px;
+    color: white;
+}
+
+
+
+.search-all {
+    width: 99%;
+    padding: 2px;
+    border: 1px solid gray;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.search-all span {
+    padding: 5px;
+}
+
+.search-all .input-search {
+    width: 90%;
+    outline: none;
+    border: none;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.content-table {
+    height: 200px;
+}
+
+
+
+td > input {
+    border: none;
+    outline: none;
+    display: inline-block;
+    width: 85%;
+}
+
+td > span {
+    display: inline-block;
+}
+
+
+
+

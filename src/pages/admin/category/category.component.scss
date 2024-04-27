@@ -1,0 +1,109 @@
+.font-icon {
+    font-size: 18px;
+    padding: 0 10px;
+}
+
+
+.content {
+    padding-left: 30px;
+    overflow: scroll;
+    height: 700px;
+    padding-bottom: 50px;
+    padding-top: 40px;
+}
+
+.title {
+    font-size: 20px;
+    color: #42526d;
+    padding-bottom: 20px;
+    display: inline-block;
+}
+
+.new {
+    margin-left: 960px;
+    display: inline-block;
+    font-size: 14px;
+    padding: 5px 10px;
+    background-color: #244A64;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+.search-all {
+    width: 99%;
+    padding: 2px;
+    border: 1px solid gray;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.search-all span {
+    padding: 5px;
+}
+
+.search-all .input-search {
+    width: 90%;
+    outline: none;
+    border: none;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.content-table {
+    height: 200px;
+}
+
+
+
+td > input {
+    border: none;
+    outline: none;
+    display: inline-block;
+    width: 85%;
+}
+
+td > span {
+    display: inline-block;
+}
+
+
+
+.title-modal {
+    //background-color: #244A64;
+    color: #244A64;
+    font-size: 18px;
+    height: 30px;
+    margin-bottom: 0;
+}
+
+
+.modal-input {
+    width: 100%;
+    border: 1px gray solid;
+    padding: 3px;
+}
+
+.modal-content label {
+    font-size: 15px;
+    color: #244A64;
+    font-weight: bold;
+}
+
+.modal-footer button {
+    width: 100px;
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+}
+
+.modal-footer .btn-modal-cancel {
+    margin-right: 30px;
+}
+
+.modal-footer .btn-modal-ok {
+    background-color: #3a5c70;
+    color: #FFFFFF;
+}

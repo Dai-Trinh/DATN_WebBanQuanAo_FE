@@ -1,0 +1,22 @@
+<div class="collection">
+    <app-header-user [isScroll]="true"></app-header-user>
+    <div class="content-collection">
+        <nz-breadcrumb nzSeparator=">">
+            <nz-breadcrumb-item>Trang chủ</nz-breadcrumb-item>
+            <nz-breadcrumb-item>
+                <a>Bộ sưu tập</a>
+            </nz-breadcrumb-item>
+            <nz-breadcrumb-item>Xuân hè 2024</nz-breadcrumb-item>
+        </nz-breadcrumb>
+    </div>
+    <div class="collection-product">
+        <div class="product" *ngFor="let d of dataItem">
+            <img src="../../../assets/image/Banner 1 - 1920x900 - Hero banner.jpg" alt="">
+            <p>Bản lĩnh Việt Nam</p>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="page">
+        <nz-pagination [(nzPageIndex)]="current" [nzTotal]="50" [nzPageSize]="20" [nzSize]="'small'"></nz-pagination>
+    </div>
+</div>

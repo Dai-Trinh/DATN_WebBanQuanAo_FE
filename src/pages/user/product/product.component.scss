@@ -1,0 +1,75 @@
+@import url('../collection/collection.component.scss');
+@import url('../../../assets/icon/themify-icons/themify-icons.css');
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.content-product {
+    float: left;
+    width: 380px;
+    height: 600px;
+    margin-right: 25px;
+    margin-bottom: 50px;
+    cursor: pointer;
+    position: relative;
+}
+
+.content-product .product-infor {
+    display: flex;
+    flex-direction: row;
+}
+
+.content-product .product-infor i {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.shopping-cart {
+    position: absolute;
+    font-size: 20px;
+    top: 440px;
+    left: 330px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: white;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.shopping-cart-none {
+    display: none;
+}
+
+.shopping-cart-flex {
+    display: flex;
+}
+
+.new {
+    position: absolute;
+    display: flex;
+    top: 20px;
+    left: 20px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    background-color: white;
+    border: 1px #BCBEC0 solid;
+    
+}
+
+.new > p {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.price {
+    margin-top: 10px;
+}
+
+

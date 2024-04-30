@@ -16,6 +16,12 @@ import { ProductManagementComponent } from 'src/pages/admin/product-management/p
 import { AppRoutingModule } from './app-routing.modules';
 import { AddProductComponent } from 'src/pages/admin/product-management/add-product/add-product.component';
 import { CategoryComponent } from 'src/pages/admin/category/category.component';
+import { AppAdminComponent } from 'src/pages/admin/app-admin/app-admin.component';
+import { HeaderUserComponent } from 'src/pages/user/components/header-user/header-user.component';
+import { HomeComponent } from 'src/pages/user/home/home.component';
+import { MenuUserComponent } from 'src/pages/user/components/menu-user/menu-user.component';
+import { CollectionComponent } from 'src/pages/user/collection/collection.component';
+import { ProductComponent } from 'src/pages/user/product/product.component';
 
 registerLocaleData(vi);
 
@@ -26,7 +32,13 @@ registerLocaleData(vi);
     HeaderComponent,
     ProductManagementComponent,
     AddProductComponent,
-    CategoryComponent
+    CategoryComponent,
+    AppAdminComponent,
+    HeaderUserComponent,
+    HomeComponent,
+    MenuUserComponent,
+    CollectionComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

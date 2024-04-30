@@ -1,0 +1,17 @@
+<app-header-user [isScroll]="isScrolled"></app-header-user>
+<div class="banner">
+    <div [class]="slideClass[0]">
+        <img src="../../../assets/image/Hero Banner 1 -1920x900.jpg" alt="">
+    </div>
+    <div [class]="slideClass[1]">
+        <img src="../../../assets/image/Banner 1 - 1920x900 - Hero banner.jpg" alt="">
+    </div>
+</div>
+
+<div #firstHorizontalScrollDiv (mousemove)="onScrollHorizontal($event)" class="collection">
+    <div class="collection-item" *ngFor="let i of arrDem">
+        <img src="../../../assets/image/Banner 1 - 1920x900 - Hero banner.jpg" alt="">
+        <p>Chi tiết</p>
+    </div>
+</div>
+

@@ -6,6 +6,7 @@ import { AddProductComponent } from "src/pages/admin/product-management/add-prod
 import { ProductManagementComponent } from "src/pages/admin/product-management/product-management.component";
 import { CollectionComponent } from "src/pages/user/collection/collection.component";
 import { HomeComponent } from "src/pages/user/home/home.component";
+import { ProductDetailComponent } from "src/pages/user/product-detail/product-detail.component";
 import { ProductComponent } from "src/pages/user/product/product.component";
 
 const routes : Routes = [
@@ -15,7 +16,8 @@ const routes : Routes = [
     {path: "admin", component: AppAdminComponent},
     {path: "home", component: HomeComponent},
     {path: "collection", component: CollectionComponent},
-    {path: "product", component: ProductComponent}
+    {path: "product", component: ProductComponent},
+    {path: "product-detail", component: ProductDetailComponent}
 ];
 
 

@@ -22,6 +22,7 @@ import { HomeComponent } from 'src/pages/user/home/home.component';
 import { MenuUserComponent } from 'src/pages/user/components/menu-user/menu-user.component';
 import { CollectionComponent } from 'src/pages/user/collection/collection.component';
 import { ProductComponent } from 'src/pages/user/product/product.component';
+import { ProductDetailComponent } from 'src/pages/user/product-detail/product-detail.component';
 
 registerLocaleData(vi);
 
@@ -38,7 +39,8 @@ registerLocaleData(vi);
     HomeComponent,
     MenuUserComponent,
     CollectionComponent,
-    ProductComponent
+    ProductComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,

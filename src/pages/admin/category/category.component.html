@@ -1,45 +1,52 @@
+<app-header></app-header>
 <div class="content" style="width: 100%; background-color: white;">
-    <div>
-        <div class="title">Danh sách danh mục sản phẩm</div>
-        <div class="new" (click)="openModalAddCategory()">
-            <span nz-icon nzType="plus-circle"></span> Thêm mới
-        </div>
+    <app-menu></app-menu>
+    <div class="content-category">
+        <nz-spin [nzSpinning]="isSpringing">
+            <div class="title-new">
+                <div class="title">Danh sách danh mục sản phẩm</div>
+                <div class="new" (click)="openModalAddCategory()">
+                    <span nz-icon nzType="plus-circle"></span> Thêm mới
+                </div>
+            </div>
+        
+            <div class="search-all">
+                <span nz-icon nzType="search" style="font-size: 18px;"></span>
+                <input class="input-search" [(ngModel)]="filterCommon" (change)="onHandleFetchListUser()"/>
+            </div>
+        
+            <nz-table class="content-table" nzPaginationType="small" [nzNoResult]="result">
+                <thead>
+                    <tr>
+                        <th nzAlign="center">STT</th>
+                        <th nzAlign="center">Tên danh mục</th>
+                        <th nzAlign="center">Ngày cập nhật</th>
+                        <th class="action-common">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-search">
+                        <td nzLeft></td>
+                        <td nzLeft><span nz-icon nzType="search"></span><input placeholder="Tìm kiếm..." [(ngModel)]="filterCateName" (change)="onHandleFetchListUser()"/></td>
+                        <td><span nz-icon nzType="search"></span><input placeholder="Tìm kiếm..." /></td>
+                        <td></td>
+                    </tr>
+                    <tr *ngFor="let item of dataItem, index as i">
+                        <td nzAlign="center" nzLeft>{{i + 1}}</td>
+                        <td nzLeft>{{item?.categoryName}}</td>
+                        <td>{{item?.createdTimestamp | date: 'dd/MM/yyyy'}}</td>
+                        <td nzRight class="action-common">
+                            <a (click)="openModalUpdateCate(item?.categoryName, item?.id)"><span class="font-icon" nz-icon nzType="info-circle" nzTheme="outline"></span></a>
+                            <a (click)="handleDeleteCate(item?.id)"><span class="font-icon" nz-icon nzType="delete" nzTheme="outline"></span></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        
+            <ng-template #result></ng-template>
+        </nz-spin>
+        
     </div>
-
-    <div class="search-all">
-        <span nz-icon nzType="search" style="font-size: 18px;"></span>
-        <input class="input-search" />
-    </div>
-
-    <nz-table class="content-table" nzPaginationType="small" [nzNoResult]="result">
-        <thead>
-            <tr>
-                <th nzLeft nzAlign="center">STT</th>
-                <th nzLeft>Tên danh mục</th>
-                <th>Ngày cập nhật</th>
-                <th nzRight class="action-common">Thao tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="table-search">
-                <td nzLeft></td>
-                <td nzLeft><span nz-icon nzType="search"></span><input placeholder="Tìm kiếm..." /></td>
-                <td><span nz-icon nzType="search"></span><input placeholder="Tìm kiếm..." /></td>
-
-            </tr>
-            <tr>
-                <td nzAlign="center" nzLeft>1</td>
-                <td nzLeft>Danh mục sản phẩm 1</td>
-                <td></td>
-                <td nzRight class="action-common">
-                    <a href=""><span class="font-icon" nz-icon nzType="info-circle" nzTheme="outline"></span></a>
-                    <a><span class="font-icon" nz-icon nzType="delete" nzTheme="outline"></span></a>
-                </td>
-            </tr>
-        </tbody>
-    </nz-table>
-
-    <ng-template #result></ng-template>
 </div>
 
 <nz-modal [nzVisible]="visiable" 
@@ -54,14 +61,38 @@
     </ng-template>
     <ng-template #modalContent>
         <div class="modal-content">
-            <label for="">Tên danh mục sản phẩm</label><br>
-            <input type="text" class="modal-input">
+            <label for="">Tên danh mục sản phẩm<span style="color: red;">*</span></label><br>
+            <input type="text" class="modal-input" [(ngModel)]="inputCategoryName">
         </div>
     </ng-template>
     <ng-template #modalFooter>
         <div class="modal-footer">
             <button class="btn-modal-cancel" (click)="handleCancel()">Hủy</button>
-            <button class="btn-modal-ok">Thêm mới</button>
+            <button class="btn-modal-ok" (click)="handleSaveCate()">Thêm mới</button>
+        </div>
+    </ng-template>
+</nz-modal>
+
+<nz-modal [nzVisible]="visiableUpdate" 
+[nzTitle]="modalTitle" 
+[nzContent]="modalContentUpdate" 
+(nzOnCancel)="handleCancelUpdate()"
+[nzFooter]="modalFooterUpdate">
+    <ng-template #modalTitle>
+        <div class="title-modal">
+            <p>Cập nhật danh mục sản phẩm</p>
+        </div>
+    </ng-template>
+    <ng-template #modalContentUpdate>
+        <div class="modal-content">
+            <label for="">Tên danh mục sản phẩm<span style="color: red;">*</span></label><br>
+            <input type="text" class="modal-input" [(ngModel)]="inputCategoryNameUpdate" required="Bạn phải nhập tên danh mục sản phẩm">
+        </div>
+    </ng-template>
+    <ng-template #modalFooterUpdate>
+        <div class="modal-footer">
+            <button class="btn-modal-cancel" (click)="handleCancelUpdate()">Hủy</button>
+            <button class="btn-modal-ok" (click)="handleUpdateCate()">Cập nhật</button>
         </div>
     </ng-template>
 </nz-modal>

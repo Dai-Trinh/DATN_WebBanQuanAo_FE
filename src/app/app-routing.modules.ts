@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AppAdminComponent } from "src/pages/admin/app-admin/app-admin.component";
+import { CategoryChildComponent } from "src/pages/admin/category-child/category-child.component";
 import { CategoryComponent } from "src/pages/admin/category/category.component";
 import { AddProductComponent } from "src/pages/admin/product-management/add-product/add-product.component";
 import { ProductManagementComponent } from "src/pages/admin/product-management/product-management.component";
@@ -17,7 +18,8 @@ const routes : Routes = [
     {path: "home", component: HomeComponent},
     {path: "collection", component: CollectionComponent},
     {path: "product", component: ProductComponent},
-    {path: "product-detail", component: ProductDetailComponent}
+    {path: "product-detail", component: ProductDetailComponent},
+    {path: "category-child", component: CategoryChildComponent}
 ];
 
 

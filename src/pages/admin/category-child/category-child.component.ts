@@ -1,29 +1,66 @@
-
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BaseService } from 'src/service/base.service';
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  selector: 'app-category-child',
+  templateUrl: './category-child.component.html',
+  styleUrls: ['./category-child.component.scss']
 })
-export class CategoryComponent implements OnInit {
+export class CategoryChildComponent {
+
   constructor(
     private __baseService: BaseService) { }
 
   dataItem: any[] = [];
+  dataItemParent: any[] = [];
   toltal: Number = 0;
 
   inputCategoryName: string = '';
   inputCategoryNameUpdate: string = '';
   filterCateName: string = '';
   filterCommon: string = '';
+  selectedValueNew: string = '';
 
   idUpdate: number = 0;
+  idDelete: number = 0;
+
+  selectedValueUpdate: number = 0;
+
+  messageDelete: string = '';
+  isVisiableDelete: boolean = false;
 
   placement: 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight' = 'bottomLeft';
 
   isSpringing = true;
+
+  async onHandleFetchParent() {
+    let dataRequest = {
+      pageNumber: 0,
+      pageSize: 0,
+      filter: {
+        categoryName: this.filterCateName,
+      },
+      common: this.filterCommon,
+      sortProperty: "updatedAt",
+      sortOrder: "DESC"
+    }
+
+    let res = await this.__baseService.postData('api/category/parent', dataRequest);
+    if(res?.result?.responseCode === '00'){
+      this.dataItemParent = res?.data.map((item: any) => ({
+        ...item,
+        createdTimestamp: item?.updatedAt
+          ? new Date(item?.updatedAt * 1000)
+          : '',
+      }));
+      console.log('parent:', this.dataItemParent)
+      if(this.dataItemParent.length > 0){
+        this.selectedValueNew = this.dataItemParent[0]?.id;
+      }
+    }
+
+    
+  };
 
   async onHandleFetchListUser() {
     let dataRequest = {
@@ -37,7 +74,7 @@ export class CategoryComponent implements OnInit {
       sortOrder: "DESC"
     }
 
-    let res = await this.__baseService.postData('api/category/parent', dataRequest);
+    let res = await this.__baseService.postData('api/category', dataRequest);
     if(res?.result?.responseCode === '00'){
       this.dataItem = res?.data.map((item: any) => ({
         ...item,
@@ -55,7 +92,8 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.isSpringing = true;
-    this.onHandleFetchListUser()
+    this.onHandleFetchListUser();
+    this.onHandleFetchParent();
   }
 
 
@@ -66,16 +104,25 @@ export class CategoryComponent implements OnInit {
     this.visiable = true;
   }
 
-  openModalUpdateCate(cateName: any, id: any) {
+  openModalUpdateCate(cateName: any, id: any, idParent: any) {
     this.inputCategoryNameUpdate = cateName;
     this.idUpdate = id;
+    this.selectedValueUpdate = idParent;
+    console.log('selectedValueUpdate', this.selectedValueUpdate)
     this.visiableUpdate = true;
 
+  }
+
+  openModalDelete(id: any, categoryName: any){
+    this.isVisiableDelete = true;
+    this.idDelete = id;
+    this.messageDelete = "Bạn có chắc muốn xóa danh mục sản phẩm có tên " + categoryName + "?";
   }
 
   handleCancel() {
     this.inputCategoryName = '';
     this.visiable = false;
+    this.isVisiableDelete = false;
   }
 
   handleCancelUpdate() {
@@ -88,7 +135,8 @@ export class CategoryComponent implements OnInit {
     let dataSave = {
       categoryName: this.inputCategoryName,
       createdBy: 'admin',
-      updatedBy: 'admin'
+      updatedBy: 'admin',
+      parentId: this.selectedValueNew
     }
     let res = await this.__baseService.postData('api/category/save', dataSave)
     this.onHandleFetchListUser();
@@ -101,7 +149,8 @@ export class CategoryComponent implements OnInit {
       id: this.idUpdate,
       categoryName: this.inputCategoryNameUpdate,
       createdBy: 'admin',
-      updatedBy: 'admin'
+      updatedBy: 'admin',
+      parentId: this.selectedValueUpdate
     }
     let res = await this.__baseService.putData('api/category/update/' + id, dataUpdate)
     this.onHandleFetchListUser();
@@ -133,8 +182,10 @@ export class CategoryComponent implements OnInit {
     this.onHandleFetchListUser();
   }
 
-  handleDeleteCate(id: any) {
-    this.deleteCate(id);
+  handleDeleteCate() {
+    this.isSpringing = true;
+    this.deleteCate(this.idDelete);
+    this.isVisiableDelete = false
   }
 
 }

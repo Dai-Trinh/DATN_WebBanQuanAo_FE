@@ -6,10 +6,10 @@ import { DATNAtinoNgZorroAntdModule } from './ng-zorro-antd.module';
 import { MenuComponent } from 'src/pages/admin/components/menu/menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { vi_VN } from 'ng-zorro-antd/i18n';
+import { NZ_DATE_LOCALE, NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
-import vi from '@angular/common/locales/vi';
+import { enUS } from 'date-fns/locale';
+import en from '@angular/common/locales/en'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from 'src/pages/admin/components/header/header.component';
 import { ProductManagementComponent } from 'src/pages/admin/product-management/product-management.component';
@@ -23,8 +23,9 @@ import { MenuUserComponent } from 'src/pages/user/components/menu-user/menu-user
 import { CollectionComponent } from 'src/pages/user/collection/collection.component';
 import { ProductComponent } from 'src/pages/user/product/product.component';
 import { ProductDetailComponent } from 'src/pages/user/product-detail/product-detail.component';
+import { CategoryChildComponent } from 'src/pages/admin/category-child/category-child.component';
 
-registerLocaleData(vi);
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ registerLocaleData(vi);
     MenuUserComponent,
     CollectionComponent,
     ProductComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CategoryChildComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ registerLocaleData(vi);
     AppRoutingModule
   ],
   providers: [
-    { provide: NZ_I18N, useValue: vi_VN }
+    { provide: NZ_I18N, useValue: en_US },
+    { provide: NZ_DATE_LOCALE, useValue: enUS },
   ],
   bootstrap: [AppComponent]
 })

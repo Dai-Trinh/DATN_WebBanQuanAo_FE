@@ -20,6 +20,7 @@
                     <tr>
                         <th nzAlign="center">STT</th>
                         <th nzAlign="center">Tên danh mục</th>
+                        <th nzAlign="center">Danh mục cha</th>
                         <th nzAlign="center">Ngày cập nhật</th>
                         <th class="action-common">Thao tác</th>
                     </tr>
@@ -28,16 +29,18 @@
                     <tr class="table-search">
                         <td nzLeft></td>
                         <td nzLeft><span nz-icon nzType="search"></span><input placeholder="Tìm kiếm..." [(ngModel)]="filterCateName" (change)="onHandleFetchListUser()"/></td>
+                        <td nzLeft><span nz-icon nzType="search"></span><input placeholder="Tìm kiếm..." [(ngModel)]="filterCateName" (change)="onHandleFetchListUser()"/></td>
                         <td><nz-range-picker [nzPlacement]="placement"></nz-range-picker></td>
                         <td></td>
                     </tr>
                     <tr *ngFor="let item of dataItem, index as i">
                         <td nzAlign="center" nzLeft>{{i + 1}}</td>
                         <td nzLeft>{{item?.categoryName}}</td>
+                        <td nzLeft>{{item?.categoryParent?.categoryName}}</td>
                         <td>{{item?.createdTimestamp | date: 'dd/MM/yyyy'}}</td>
                         <td nzRight class="action-common">
-                            <a (click)="openModalUpdateCate(item?.categoryName, item?.id)"><span class="font-icon" nz-icon nzType="info-circle" nzTheme="outline"></span></a>
-                            <a (click)="handleDeleteCate(item?.id)"><span class="font-icon" nz-icon nzType="delete" nzTheme="outline"></span></a>
+                            <a (click)="openModalUpdateCate(item?.categoryName, item?.id, item?.categoryParent?.id)"><span class="font-icon" nz-icon nzType="info-circle" nzTheme="outline"></span></a>
+                            <a (click)="openModalDelete(item?.id, item?.categoryName)"><span class="font-icon" nz-icon nzType="delete" nzTheme="outline"></span></a>
                         </td>
                     </tr>
                 </tbody>
@@ -61,8 +64,17 @@
     </ng-template>
     <ng-template #modalContent>
         <div class="modal-content">
-            <label for="">Tên danh mục sản phẩm<span style="color: red;">*</span></label><br>
-            <input type="text" class="modal-input" [(ngModel)]="inputCategoryName">
+            <div>
+                <label for="">Tên danh mục sản phẩm<span style="color: red;">*</span></label><br>
+                <input type="text" class="modal-input" [(ngModel)]="inputCategoryName">
+            </div>
+            <div>
+                <label for="">Tên danh mục sản phẩm cha<span style="color: red;">*</span></label><br>
+                <nz-select [(ngModel)]="selectedValueNew" nzShowSearch="true" class="select-cate">
+                    <nz-option class="select-option" *ngFor="let item of dataItemParent" [nzValue]="item.id" [nzLabel]="item.categoryName" ></nz-option>
+                </nz-select>
+            </div>
+            
         </div>
     </ng-template>
     <ng-template #modalFooter>
@@ -85,14 +97,46 @@
     </ng-template>
     <ng-template #modalContentUpdate>
         <div class="modal-content">
-            <label for="">Tên danh mục sản phẩm<span style="color: red;">*</span></label><br>
-            <input type="text" class="modal-input" [(ngModel)]="inputCategoryNameUpdate" required="Bạn phải nhập tên danh mục sản phẩm">
+            <div>
+                <label for="">Tên danh mục sản phẩm<span style="color: red;">*</span></label><br>
+                <input type="text" class="modal-input" [(ngModel)]="inputCategoryNameUpdate">
+            </div>
+            <div>
+                <label for="">Tên danh mục sản phẩm cha<span style="color: red;">*</span></label><br>
+                <nz-select [(ngModel)]="selectedValueUpdate" nzShowSearch style="width: 100%;">
+                    <nz-option *ngFor="let item of dataItemParent" [nzValue]="item?.id" [nzLabel]="item?.categoryName"></nz-option>
+                </nz-select>
+            </div>
         </div>
     </ng-template>
     <ng-template #modalFooterUpdate>
         <div class="modal-footer">
             <button class="btn-modal-cancel" (click)="handleCancelUpdate()">Hủy</button>
             <button class="btn-modal-ok" (click)="handleUpdateCate()">Cập nhật</button>
+        </div>
+    </ng-template>
+</nz-modal>
+
+<nz-modal [nzVisible]="isVisiableDelete" 
+[nzTitle]="modalTitleDelete" 
+[nzContent]="modalContentDelete" 
+(nzOnCancel)="handleCancel()"
+[nzFooter]="modalFooterDelete">
+    <ng-template #modalTitleDelete>
+        <div class="title-modal">
+            <p>Xác nhận xóa</p>
+        </div>
+    </ng-template>
+    <ng-template #modalContentDelete>
+        <div class="modal-content">
+            <p>{{messageDelete}}</p>
+            <p><span>Lưu ý</span>: Khi xóa dữ liệu không thể khôi phục lại được nữa.</p>
+        </div>
+    </ng-template>
+    <ng-template #modalFooterDelete>
+        <div class="modal-footer">
+            <button class="btn-modal-cancel" (click)="handleCancel()">Hủy</button>
+            <button class="btn-modal-ok" (click)="handleDeleteCate()">Xóa</button>
         </div>
     </ng-template>
 </nz-modal>
